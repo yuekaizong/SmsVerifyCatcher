@@ -1,6 +1,8 @@
 package com.stfalcon.smsverifycatcher_sample;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         //init views
         final EditText etCode = (EditText) findViewById(R.id.et_code);
         final Button btnVerify = (Button) findViewById(R.id.btn_verify);
+        final EditText sender = findViewById(R.id.et_sender);
 
         //init SmsVerifyCatcher
         smsVerifyCatcher = new SmsVerifyCatcher(this, new OnSmsCatchListener<String>() {
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //set phone number filter if needed
-        smsVerifyCatcher.setPhoneNumberFilter("777");
+//        smsVerifyCatcher.setPhoneNumberFilter("777");
         //smsVerifyCatcher.setFilter("regexp");
 
         //button for sending verification code manual
@@ -45,6 +48,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //send verification code to server
+            }
+        });
+
+        sender.setText("");
+        sender.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+//                smsVerifyCatcher.setPhoneNumberFilter(editable.toString());
             }
         });
     }
@@ -56,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
      * @return only four numbers from massage string
      */
     private String parseCode(String message) {
-        Pattern p = Pattern.compile("\\b\\d{4}\\b");
+        Pattern p = Pattern.compile("\\b\\d{6}\\b");
         Matcher m = p.matcher(message);
         String code = "";
         while (m.find()) {

@@ -18,6 +18,14 @@
         android:gravity="center"
         android:hint="@string/verification_code" />
 
+    <EditText
+        android:id="@+id/et_sender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:hint="发送验证码的号码" />
+
     <Button
         android:id="@+id/btn_verify"
         android:layout_width="match_parent"

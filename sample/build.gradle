@@ -1,12 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+
+    signingConfigs {
+        aga {
+            keyAlias 'aga'
+            keyPassword 'a123456'
+            storeFile file('../aga-cloudin.jks')
+            storePassword 'a123456'
+        }
+    }
+
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.stfalcon.smsverifycatcher_sample"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -14,12 +24,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.aga
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation project(':smsverifycatcher')
 }
